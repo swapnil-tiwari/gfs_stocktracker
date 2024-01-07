@@ -1,7 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./formview.module.css";
+import { useState } from "react";
 function FormView() {
+  const [stockDetails, setstockDetails] = useState({
+    stockName: "",
+    entryPrice: "",
+    stoploss: "",
+    trailingStoploss: "",
+    reason: "",
+  });
+  const handleFormChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setstockDetails((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  console.log(stockDetails);
+
   return (
     <div id={styles.formContainer}>
       {/* <div className={styles.caption}>GFS Stock Entry Form</div> */}
@@ -10,7 +30,7 @@ function FormView() {
         <div class="form-group">
           <label for="exampleInputEmail1">Date</label>
           <input
-            type="email"
+            type="date"
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
@@ -25,8 +45,9 @@ function FormView() {
           <input
             type="text"
             class="form-control"
-            id="exampleInputPassword1"
+            name="stockName"
             placeholder="Enter Stock Name"
+            onChange={handleFormChange}
           />
         </div>
         <div class="form-group">
@@ -34,9 +55,10 @@ function FormView() {
           <input
             type="number"
             class="form-control"
-            id="exampleInputEmail1"
+            name="entryPrice"
             aria-describedby="emailHelp"
             placeholder="Enter Entry Price"
+            onChange={handleFormChange}
           />
           <small id="emailHelp" class="form-text text-muted">
             We'll never share your email with anyone else.
@@ -47,9 +69,10 @@ function FormView() {
           <input
             type="number"
             class="form-control"
-            id="exampleInputEmail1"
+            name="exitPrice"
             aria-describedby="emailHelp"
             placeholder="Enter Exit Price"
+            onChange={handleFormChange}
           />
         </div>
         <div class="form-group">
@@ -57,9 +80,10 @@ function FormView() {
           <input
             type="number"
             class="form-control"
-            id="exampleInputEmail1"
+            name="stoploss"
             aria-describedby="emailHelp"
             placeholder="Enter Stoploss"
+            onChange={handleFormChange}
           />
         </div>
         <div class="form-group">
@@ -67,9 +91,10 @@ function FormView() {
           <input
             type="number"
             class="form-control"
-            id="exampleInputEmail1"
+            name="trailingStoploss"
             aria-describedby="emailHelp"
             placeholder="Enter Trailing Stoploss"
+            onChange={handleFormChange}
           />
         </div>
         <div class="form-group">
@@ -77,12 +102,13 @@ function FormView() {
           <input
             type="text"
             class="form-control"
-            id="exampleInputEmail1"
+            name="reason"
             aria-describedby="emailHelp"
             placeholder="Enter reason for entry "
+            onChange={handleFormChange}
           />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="button" class="btn btn-primary">
           Submit
         </button>
       </form>
