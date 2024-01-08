@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./formview.module.css";
 import { useState } from "react";
+import { stocksAppender } from "../assets/stocksData.js";
 function FormView() {
   const [stockDetails, setstockDetails] = useState({
     stockName: "",
@@ -20,7 +21,31 @@ function FormView() {
       };
     });
   };
-  console.log(stockDetails);
+  const handleSubmit = async (event) => {
+    let res = await fetch(
+      "https://script.google.com/macros/s/AKfycbzIYjuSp9IN5PGzPID09Nrv82ZPS_y7mWMm3w_okGm5r2b2Prhs4-u7DSKKc1rCydXH/exec",
+      {
+        // Adding method type
+        method: "POST",
+
+        mode: "cors",
+        credentials: "include", // include, *same-origin, omit
+        redirect: "follow",
+
+        // Adding body or contents to send
+        body: JSON.stringify(stockDetails),
+
+        // Adding headers to the request
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    let response = await response.json();
+    console.log(response);
+  };
+
+  // console.log(stockDetails);
 
   return (
     <div id={styles.formContainer}>
@@ -104,11 +129,11 @@ function FormView() {
             class="form-control"
             name="reason"
             aria-describedby="emailHelp"
-            placeholder="Enter reason for entry "
+            placeholder="Enter reason for entry"
             onChange={handleFormChange}
           />
         </div>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" onClick={handleSubmit}>
           Submit
         </button>
       </form>
