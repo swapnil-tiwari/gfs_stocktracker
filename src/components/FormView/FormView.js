@@ -22,13 +22,13 @@ function FormView() {
     });
   };
   const handleSubmit = async (event) => {
-    let res = await fetch(
-      "https://script.google.com/macros/s/AKfycbzIYjuSp9IN5PGzPID09Nrv82ZPS_y7mWMm3w_okGm5r2b2Prhs4-u7DSKKc1rCydXH/exec",
+    let response = await fetch(
+      "https://script.google.com/macros/s/AKfycbx2mO8oSXpryAJkPHxqXmZ5JEx18_mgSmxqqb6ysuOqz35R9mbmLz2Zf-td2eWTQKCU/exec",
       {
         // Adding method type
         method: "POST",
 
-        mode: "cors",
+        mode: "no-cors",
         credentials: "include", // include, *same-origin, omit
         redirect: "follow",
 
@@ -38,10 +38,12 @@ function FormView() {
         // Adding headers to the request
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
         },
       }
     );
-    let response = await response.json();
+    // let res = await response.json();
+
     console.log(response);
   };
 
