@@ -88,7 +88,7 @@ function FormView() {
             onChange={handleFormChange}
           />
           <small id="emailHelp" class="form-text text-muted">
-            We'll never share your email with anyone else.
+            We'll never share your email with anyone else ever.
           </small>
         </div>
         <div class="form-group">
